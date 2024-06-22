@@ -13,8 +13,9 @@ public class Menu extends JFrame {
     private JMenuBar menuBar;
     private JMenu menuArchivo, menuEditar, menuPrestar, menuDevolucion;
     private JMenuItem menuItemSalir, menuItemIngresar, menuItemEliminar, menuItemListar, menuItemRegistrar, menuItemVerPrestamo, menuItemRegistrarDevolucion, menuItemVerRegistro;
-    private JButton btnRegistrarIngreso, btnListarActores, btnRegistrarSalida;
+    private JButton btnRegistrarIngreso, btnRegistrarSalida, btnListarActores, btnAccesoInstalaciones, btnReportesIncidencias;
     private RegistroActor registroActor;
+    private JLabel lblMensajeEmergencia;
 
     public Menu() {
         registroActor = new RegistroActor();
@@ -142,7 +143,7 @@ public class Menu extends JFrame {
         JLabel lblImagen = new JLabel(scaledImageIcon);
         gbc.gridx = 0;
         gbc.gridy = 0;
-        gbc.gridheight = 2;
+        gbc.gridheight = 3;
         panelCentral.add(lblImagen, gbc);
 
         // Crear y agregar el botón Registrar Ingreso
@@ -153,22 +154,46 @@ public class Menu extends JFrame {
         gbc.insets = new Insets(10, 10, 10, 10);
         panelCentral.add(btnRegistrarIngreso, gbc);
 
-        // Crear y agregar el botón Lista personas
-        btnListarActores = new JButton("Personas en la facultad");
-        gbc.gridx = 2;
-        gbc.gridy = 0;
-        gbc.gridheight = 1;
-        gbc.insets = new Insets(10, 10, 10, 10);
-        panelCentral.add(btnListarActores, gbc);
-        
         // Crear y agregar el botón Registrar Salida
         btnRegistrarSalida = new JButton("Registrar Salida");
+        gbc.gridx = 2;
+        gbc.gridy = 0;
+        gbc.insets = new Insets(10, 10, 10, 10);
+        panelCentral.add(btnRegistrarSalida, gbc);
+
+        // Crear y agregar el botón Personas en la facultad
+        btnListarActores = new JButton("Personas en la facultad");
         gbc.gridx = 1;
         gbc.gridy = 1;
-        panelCentral.add(btnRegistrarSalida, gbc);
+        gbc.gridwidth = 2;
+        gbc.insets = new Insets(10, 10, 10, 10);
+        panelCentral.add(btnListarActores, gbc);
+
+        // Crear y agregar el botón Acceso a Instalaciones
+        btnAccesoInstalaciones = new JButton("Acceso a Instalaciones");
+        gbc.gridx = 1;
+        gbc.gridy = 2;
+        gbc.gridwidth = 1;
+        gbc.insets = new Insets(10, 10, 10, 10);
+        panelCentral.add(btnAccesoInstalaciones, gbc);
+
+        // Crear y agregar el botón Reportes de Incidencias
+        btnReportesIncidencias = new JButton("Reportes de Incidencias");
+        gbc.gridx = 2;
+        gbc.gridy = 2;
+        gbc.insets = new Insets(10, 10, 10, 10);
+        panelCentral.add(btnReportesIncidencias, gbc);
 
         add(panelCentral, BorderLayout.CENTER);
 
+        // Crear y agregar el panel de mensaje de emergencia
+        JPanel panelMensajeEmergencia = new JPanel();
+        panelMensajeEmergencia.setBackground(new Color(255, 69, 0)); // Color de fondo de emergencia
+        lblMensajeEmergencia = new JLabel("Mensaje de emergencia: Este es un mensaje de ejemplo.");
+        lblMensajeEmergencia.setFont(new Font("Arial", Font.BOLD, 16));
+        lblMensajeEmergencia.setForeground(Color.WHITE);
+        panelMensajeEmergencia.add(lblMensajeEmergencia);
+        add(panelMensajeEmergencia, BorderLayout.SOUTH);
 
         // Agregar ActionListeners a los botones
         btnRegistrarIngreso.addActionListener(new ActionListener() {
@@ -179,6 +204,13 @@ public class Menu extends JFrame {
             }
         });
 
+        btnRegistrarSalida.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                SalidaActor salidaActor = new SalidaActor(registroActor);
+                salidaActor.setVisible(true);
+            }
+        });
 
         btnListarActores.addActionListener(new ActionListener() {
             @Override
@@ -187,12 +219,20 @@ public class Menu extends JFrame {
                 listarActores.setVisible(true);
             }
         });
-        
-        btnRegistrarSalida.addActionListener(new ActionListener() {
+
+        btnAccesoInstalaciones.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                SalidaActor salidaActor = new SalidaActor(registroActor);
-                salidaActor.setVisible(true);
+                // Aquí iría el código para manejar el acceso a instalaciones
+                JOptionPane.showMessageDialog(null, "Acceso a Instalaciones no implementado aún.");
+            }
+        });
+
+        btnReportesIncidencias.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // Aquí iría el código para manejar los reportes de incidencias
+                JOptionPane.showMessageDialog(null, "Reportes de Incidencias no implementado aún.");
             }
         });
 
@@ -205,8 +245,8 @@ public class Menu extends JFrame {
 
     public static void main(String[] args) {
         // Mostrar el splash screen
-        SplashScreen splash = new SplashScreen(5000);
-        splash.showSplashAndExit();
+        // SplashScreen splash = new SplashScreen(5000);
+        // splash.showSplashAndExit();
 
         // Iniciar la aplicación principal después del splash screen
         SwingUtilities.invokeLater(new Runnable() {
