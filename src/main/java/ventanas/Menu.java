@@ -1,6 +1,9 @@
 package ventanas;
 
 import javax.swing.*;
+
+import Datos.RegistroActor;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -10,9 +13,11 @@ public class Menu extends JFrame {
     private JMenuBar menuBar;
     private JMenu menuArchivo, menuEditar, menuPrestar, menuDevolucion;
     private JMenuItem menuItemSalir, menuItemIngresar, menuItemEliminar, menuItemListar, menuItemRegistrar, menuItemVerPrestamo, menuItemRegistrarDevolucion, menuItemVerRegistro;
-    private JButton btnRegistrarIngreso, btnRegistrarSalida;
+    private JButton btnRegistrarIngreso, btnListarActores, btnRegistrarSalida;
+    private RegistroActor registroActor;
 
     public Menu() {
+        registroActor = new RegistroActor();
         initUI();
     }
 
@@ -148,6 +153,14 @@ public class Menu extends JFrame {
         gbc.insets = new Insets(10, 10, 10, 10);
         panelCentral.add(btnRegistrarIngreso, gbc);
 
+        // Crear y agregar el botón Lista personas
+        btnListarActores = new JButton("Personas en la facultad");
+        gbc.gridx = 2;
+        gbc.gridy = 0;
+        gbc.gridheight = 1;
+        gbc.insets = new Insets(10, 10, 10, 10);
+        panelCentral.add(btnListarActores, gbc);
+        
         // Crear y agregar el botón Registrar Salida
         btnRegistrarSalida = new JButton("Registrar Salida");
         gbc.gridx = 1;
@@ -156,20 +169,30 @@ public class Menu extends JFrame {
 
         add(panelCentral, BorderLayout.CENTER);
 
+
         // Agregar ActionListeners a los botones
         btnRegistrarIngreso.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent event) {
-                Ingresar in = new Ingresar();
-                in.setVisible(true);
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                IngresarActor ingresarActor = new IngresarActor(registroActor);
+                ingresarActor.setVisible(true);
             }
         });
 
+
+        btnListarActores.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                ListarActores listarActores = new ListarActores(registroActor);
+                listarActores.setVisible(true);
+            }
+        });
+        
         btnRegistrarSalida.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent event) {
-                // Acción para registrar salida
-                // Ingresar salida = new Ingresar();
-                // salida.setVisible(true);
-                // Este código debe ser ajustado dependiendo de cómo se maneje la salida en tu aplicación
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                SalidaActor salidaActor = new SalidaActor(registroActor);
+                salidaActor.setVisible(true);
             }
         });
 
