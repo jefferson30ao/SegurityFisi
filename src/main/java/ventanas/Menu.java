@@ -175,12 +175,17 @@ public class Menu extends JFrame {
 
         // Configurar el frame
         setTitle("Menu Principal");
-        setSize(600, 400); // Aumentar el tamaño de la ventana
+        setSize(900, 700); // Aumentar el tamaño de la ventana
         setLocationRelativeTo(null);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
     }
 
     public static void main(String[] args) {
+        // Mostrar el splash screen
+        SplashScreen splash = new SplashScreen(5000);
+        splash.showSplashAndExit();
+
+        // Iniciar la aplicación principal después del splash screen
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
