@@ -226,8 +226,8 @@ public class Instalaciones extends JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
     private void agregarModeloTablaInstalacion(){
-        modeloInstalacion.addColumn("Codigo_Inst");
-        modeloInstalacion.addColumn("Nombre_Inst");
+        modeloInstalacion.addColumn("Nombre_Instal..");
+        modeloInstalacion.addColumn("Codigo _Instal..");
         modeloInstalacion.addColumn("Estado");
         modeloInstalacion.addColumn("Prestador"); 
         jTable1.setModel(modeloInstalacion);
