@@ -55,6 +55,10 @@ public class Devolucion extends JFrame {
             public void actionPerformed(ActionEvent evt) {
                 DcodUsuActionPerformed(evt);
             }
+
+            private void DcodUsuActionPerformed(ActionEvent evt) {
+                throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+            }
         });
 
         Dlibro.addActionListener(new ActionListener() {
