@@ -15,11 +15,7 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 public class Menu extends JFrame {
-
-    private JMenuBar menuBar;
-    private JMenu menuArchivo, menuEditar, menuPrestar, menuDevolucion;
-    private JMenuItem menuItemSalir, menuItemIngresar, menuItemEliminar, menuItemListar, menuItemRegistrar, menuItemVerPrestamo, menuItemRegistrarDevolucion, menuItemVerRegistro;
-    private JButton btnRegistrarIngreso, btnRegistrarSalida, btnListarActores, btnAccesoInstalaciones, btnReportesIncidencias;
+    private JButton btnRegistrarIngreso, btnRegistrarSalida, btnListarActores, btnAccesoInstalaciones, btnReportesIncidencias, btnGestionBiblioteca;
     private RegistroActor registroActor;
     private JLabel lblMensajeEmergencia;
     Instalaciones I1 = new Instalaciones();
@@ -30,106 +26,6 @@ public class Menu extends JFrame {
     }
 
     private void initUI() {
-        // Crear la barra de menú
-        menuBar = new JMenuBar();
-
-        // Crear los menús
-        menuArchivo = new JMenu("Archivo");
-        menuEditar = new JMenu("Editar");
-        menuPrestar = new JMenu("Prestar");
-        menuDevolucion = new JMenu("Devolución");
-
-        // Aplicar estilo a los menús
-        setMenuStyle(menuArchivo);
-        setMenuStyle(menuEditar);
-        setMenuStyle(menuPrestar);
-        setMenuStyle(menuDevolucion); 
-
-
-        // Crear los elementos de menú
-        menuItemSalir = new JMenuItem("Salir");
-        menuItemIngresar = new JMenuItem("Ingresar");
-        menuItemEliminar = new JMenuItem("Eliminar");
-        menuItemListar = new JMenuItem("Listar");
-        menuItemRegistrar = new JMenuItem("Registrar Préstamo");
-        menuItemVerPrestamo = new JMenuItem("Ver Préstamo");
-        menuItemRegistrarDevolucion = new JMenuItem("Registrar Devolución");
-        menuItemVerRegistro = new JMenuItem("Ver Registro");
-
-        // Agregar ActionListeners a los elementos de menú
-        menuItemSalir.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent event) {
-                System.exit(0);
-            }
-        });
-        
-        menuItemIngresar.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent event) {
-                Ingresar in = new Ingresar();
-                in.setVisible(true);
-            }
-        });
-
-        menuItemEliminar.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent event) {
-                Eliminar el = new Eliminar();
-                el.setVisible(true);
-            }
-        });
-
-        menuItemListar.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent event) {
-                Listar li = new Listar();
-                li.setVisible(true);
-            }
-        });
-
-        menuItemRegistrar.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent event) {
-                Prestamos P = new Prestamos();
-                P.setVisible(true);
-            }
-        });
-
-        menuItemVerPrestamo.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent event) {
-                VerRegistro V = new VerRegistro();
-                V.setVisible(true);
-            }
-        });
-
-        menuItemRegistrarDevolucion.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent event) {
-                Devolucion D = new Devolucion();
-                D.setVisible(true);
-            }
-        });
-
-        menuItemVerRegistro.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent event) {
-                VerRegistro V = new VerRegistro();
-                V.setVisible(true);
-            }
-        });
-
-        // Agregar los elementos de menú a los menús
-        menuArchivo.add(menuItemSalir);
-        menuEditar.add(menuItemIngresar);
-        menuEditar.add(menuItemEliminar);
-        menuEditar.add(menuItemListar);
-        menuPrestar.add(menuItemRegistrar);
-        menuPrestar.add(menuItemVerPrestamo);
-        menuDevolucion.add(menuItemRegistrarDevolucion);
-        menuDevolucion.add(menuItemVerRegistro);
-
-        // Agregar los menús a la barra de menú
-        menuBar.add(menuArchivo);
-        menuBar.add(menuEditar);
-        menuBar.add(menuPrestar);
-        menuBar.add(menuDevolucion);
-
-        // Agregar la barra de menú al frame
-        setJMenuBar(menuBar);
 
         // Configurar el layout del frame
         setLayout(new BorderLayout());
@@ -200,6 +96,23 @@ public class Menu extends JFrame {
 
         add(panelCentral, BorderLayout.CENTER);
 
+        // Crear y agregar el botón biblio
+        btnGestionBiblioteca = new JButton("Gestión de Biblioteca");
+        gbc.gridx = 3;
+        gbc.gridy = 2;
+        gbc.insets = new Insets(10, 10, 10, 10);
+        panelCentral.add(btnGestionBiblioteca, gbc);
+
+        btnGestionBiblioteca.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Biblioteca biblioteca = new Biblioteca();
+                biblioteca.setVisible(true);
+            }
+        });
+        
+        add(panelCentral, BorderLayout.CENTER);
+
         // Crear y agregar el panel de mensaje de emergencia
         JPanel panelMensajeEmergencia = new JPanel();
         panelMensajeEmergencia.setBackground(new Color(255, 69, 0)); // Color de fondo de emergencia
@@ -234,6 +147,7 @@ public class Menu extends JFrame {
             }
         });
 
+
         btnAccesoInstalaciones.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -261,9 +175,7 @@ public class Menu extends JFrame {
         setLocationRelativeTo(null);
         setResizable(false);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
-        
     }
-
 
     // FONDO DE IMAGEN //
     class BackgroundPanel extends JPanel {
@@ -310,52 +222,7 @@ public class Menu extends JFrame {
         }
     }
 
-    private void setMenuStyle(JMenu menu) {
-
-        menu.setForeground(Color.WHITE); 
-        menu.setFont(new Font("Arial", Font.BOLD, 14)); 
-        menu.setOpaque(true);
-        menu.setBackground(new Color(41, 128, 185));
-        menu.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5)); 
-        menu.setBorderPainted(false); 
     
-        // Estilo para los subitems de menú
-        UIManager.put("MenuItem.selectionBackground", new Color(71, 179, 255)); 
-        UIManager.put("MenuItem.selectionForeground", Color.WHITE); 
-        UIManager.put("Menu.opaque", true); 
-    
-       
-        for (Component comp : menu.getMenuComponents()) {
-            if (comp instanceof JMenu) {
-                JMenu submenu = (JMenu) comp;
-                submenu.setForeground(Color.WHITE); 
-                submenu.setFont(new Font("Arial", Font.BOLD, 14)); 
-                submenu.setOpaque(true);
-                submenu.setBackground(new Color(51, 153, 255)); 
-                submenu.setBorderPainted(false); 
-                setMenuItemsStyle(submenu); 
-            } else if (comp instanceof JMenuItem) {
-                JMenuItem menuItem = (JMenuItem) comp;
-                menuItem.setForeground(Color.BLACK); 
-                menuItem.setFont(new Font("Arial", Font.PLAIN, 14)); 
-                menuItem.setBackground(Color.WHITE); 
-                menuItem.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Color.LIGHT_GRAY)); 
-            }
-        }
-    }
-        
-    private void setMenuItemsStyle(JMenu menu) {
-        
-        for (Component comp : menu.getMenuComponents()) {
-            if (comp instanceof JMenuItem) {
-                JMenuItem menuItem = (JMenuItem) comp;
-                menuItem.setForeground(Color.WHITE); 
-                menuItem.setFont(new Font("Arial", Font.PLAIN, 14)); 
-                menuItem.setBackground(new Color(51, 153, 255)); 
-                menuItem.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Color.LIGHT_GRAY));
-            }
-        }
-    }
     public static void main(String[] args) {
         // Mostrar el splash screen
         // SplashScreen splash = new SplashScreen(5000);
