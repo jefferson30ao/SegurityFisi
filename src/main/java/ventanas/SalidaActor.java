@@ -25,9 +25,10 @@ public class SalidaActor extends JFrame {
         this.registroActor = registroActor;
 
         setTitle("Registro de Salida de Actores");
-        setSize(500, 400);
+        setSize(600, 500);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null);
+        setResizable(false);
 
         JPanel panel = new JPanel();
         panel.setLayout(new BorderLayout(10, 10));

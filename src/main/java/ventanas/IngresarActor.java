@@ -28,9 +28,10 @@ public class IngresarActor extends JFrame {
         this.registroActor = registroActor;
 
         setTitle("Registro de Ingreso de Actores");
-        setSize(400, 400);
+        setSize(600, 500);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null);
+        setResizable(false);
 
         JPanel panel = new JPanel();
         panel.setLayout(new GridLayout(0, 2, 10, 10));

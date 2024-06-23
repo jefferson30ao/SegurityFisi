@@ -16,6 +16,7 @@ public class Menu extends JFrame {
     private JButton btnRegistrarIngreso, btnRegistrarSalida, btnListarActores, btnAccesoInstalaciones, btnReportesIncidencias;
     private RegistroActor registroActor;
     private JLabel lblMensajeEmergencia;
+    Instalaciones I1 = new Instalaciones();
 
     public Menu() {
         registroActor = new RegistroActor();
@@ -224,8 +225,13 @@ public class Menu extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // Aquí iría el código para manejar el acceso a instalaciones
-                JOptionPane.showMessageDialog(null, "Acceso a Instalaciones no implementado aún.");
+                //JOptionPane.showMessageDialog(null, "Acceso a Instalaciones no implementado aún.");
+                //I1.setMenu(this);
+                I1.setVisible(true);
+                //this.setVisible(false);
             }
+
+           
         });
 
         btnReportesIncidencias.addActionListener(new ActionListener() {
@@ -240,7 +246,9 @@ public class Menu extends JFrame {
         setTitle("Menu Principal");
         setSize(900, 700); // Aumentar el tamaño de la ventana
         setLocationRelativeTo(null);
+        setResizable(false);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
+        
     }
 
     public static void main(String[] args) {

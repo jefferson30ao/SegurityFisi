@@ -36,11 +36,13 @@ public class Devolucion extends JFrame {
         jLabel1 = new JLabel();
         jLabel2 = new JLabel();
         jLabel3 = new JLabel();
-        DcodUsu = new JTextField(20);
+        DcodUsu = new JTextField();
+        DcodUsu.setPreferredSize(new Dimension(200, 30));
         Dlibro = new JRadioButton("Libro");
         Dtesis = new JRadioButton("Tesis");
         Drevista = new JRadioButton("Revista");
-        DcodDoc = new JTextField(20);
+        DcodDoc = new JTextField();
+        DcodDoc.setPreferredSize(new Dimension(200, 30));
         RegistroDev = new JButton("Registrar devolución");
         jButton2 = new JButton("Back");
         tipoGrupo = new ButtonGroup();
@@ -54,6 +56,10 @@ public class Devolucion extends JFrame {
         DcodUsu.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
                 DcodUsuActionPerformed(evt);
+            }
+
+            private void DcodUsuActionPerformed(ActionEvent evt) {
+                throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
             }
         });
 
@@ -133,8 +139,9 @@ public class Devolucion extends JFrame {
         // Configurar el frame
         add(jPanel1);
         setTitle("Devolución de Material");
-        setSize(500, 400);
+        setSize(700, 400);
         setLocationRelativeTo(null);
+        setResizable(false);
     }
 
 
