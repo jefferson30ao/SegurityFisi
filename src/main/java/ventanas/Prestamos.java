@@ -293,12 +293,10 @@ public class Prestamos extends JFrame {
     private void BBuscarActionPerformed(ActionEvent evt) {
         String titulo = this.txt6.getText();
         String tipo;
-        boolean encontrado = false;
         T.setRowCount(0); // Limpiar todas las filas antes de agregar el resultado
 
         for (Volumen d : Registro.getListaDocumentos()) {
             if (d.getTitulo().equalsIgnoreCase(titulo)) { // Comparar ignorando mayúsculas y minúsculas
-                encontrado = true;
                 if (d instanceof Libro) {
                     tipo ="Libro";
                     Libro libro = (Libro) d;
