@@ -2,11 +2,17 @@ package ventanas;
 
 import javax.swing.*;
 
+
 import Datos.RegistroActor;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import javax.imageio.ImageIO;
 
 public class Menu extends JFrame {
 
@@ -32,6 +38,13 @@ public class Menu extends JFrame {
         menuEditar = new JMenu("Editar");
         menuPrestar = new JMenu("Prestar");
         menuDevolucion = new JMenu("Devolución");
+
+        // Aplicar estilo a los menús
+        setMenuStyle(menuArchivo);
+        setMenuStyle(menuEditar);
+        setMenuStyle(menuPrestar);
+        setMenuStyle(menuDevolucion); 
+
 
         // Crear los elementos de menú
         menuItemSalir = new JMenuItem("Salir");
@@ -131,10 +144,10 @@ public class Menu extends JFrame {
         panelTitulo.add(lblTitulo);
         add(panelTitulo, BorderLayout.NORTH);
 
-        // Crear el panel de la imagen y botones
-        JPanel panelCentral = new JPanel();
+        // Crear el panel central con imagen de fondo
+        JPanel panelCentral = new BackgroundPanel();
         panelCentral.setLayout(new GridBagLayout());
-        panelCentral.setBackground(new Color(224, 255, 255)); // Color de fondo amigable
+        panelCentral.setBackground(new Color(224, 255, 255)); 
         GridBagConstraints gbc = new GridBagConstraints();
         
         // Crear y agregar la imagen
@@ -251,6 +264,98 @@ public class Menu extends JFrame {
         
     }
 
+
+    // FONDO DE IMAGEN //
+    class BackgroundPanel extends JPanel {
+    private BufferedImage backgroundImage;
+    private Image logoFISI;
+    private Image logoSM;
+
+    public BackgroundPanel() {
+        try {
+            backgroundImage = ImageIO.read(new File("src/main/java/resources/FISI.jpg"));
+            logoFISI = ImageIO.read(new File("src/main/java/resources/LogoFISI.png"));
+            logoFISI = logoFISI.getScaledInstance(100, 100, Image.SCALE_SMOOTH);
+            
+            logoSM = ImageIO.read(new File("src/main/java/resources/LogoSM.png"));  
+            logoSM = logoSM.getScaledInstance(100, 100, Image.SCALE_SMOOTH);   
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        if (backgroundImage != null) {
+            Graphics2D g2d = (Graphics2D) g.create();
+           
+            g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.25f)); //Degradado
+            g2d.drawImage(backgroundImage, 0, 0, getWidth(), getHeight(), this);
+
+            // LogoFISI 
+            int logoFISIX = getWidth() - logoFISI.getWidth(this) - 10; 
+            int logoFISIY = 10; 
+            g2d.drawImage(logoFISI, logoFISIX, logoFISIY, this);
+                
+            // LogoSM 
+            int logoSMX = 10; 
+            int logoSMY = 10; 
+            g2d.drawImage(logoSM, logoSMX, logoSMY, this);            
+      
+            g2d.dispose();
+
+        }
+        }
+    }
+
+    private void setMenuStyle(JMenu menu) {
+
+        menu.setForeground(Color.WHITE); 
+        menu.setFont(new Font("Arial", Font.BOLD, 14)); 
+        menu.setOpaque(true);
+        menu.setBackground(new Color(41, 128, 185));
+        menu.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5)); 
+        menu.setBorderPainted(false); 
+    
+        // Estilo para los subitems de menú
+        UIManager.put("MenuItem.selectionBackground", new Color(71, 179, 255)); 
+        UIManager.put("MenuItem.selectionForeground", Color.WHITE); 
+        UIManager.put("Menu.opaque", true); 
+    
+       
+        for (Component comp : menu.getMenuComponents()) {
+            if (comp instanceof JMenu) {
+                JMenu submenu = (JMenu) comp;
+                submenu.setForeground(Color.WHITE); 
+                submenu.setFont(new Font("Arial", Font.BOLD, 14)); 
+                submenu.setOpaque(true);
+                submenu.setBackground(new Color(51, 153, 255)); 
+                submenu.setBorderPainted(false); 
+                setMenuItemsStyle(submenu); 
+            } else if (comp instanceof JMenuItem) {
+                JMenuItem menuItem = (JMenuItem) comp;
+                menuItem.setForeground(Color.BLACK); 
+                menuItem.setFont(new Font("Arial", Font.PLAIN, 14)); 
+                menuItem.setBackground(Color.WHITE); 
+                menuItem.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Color.LIGHT_GRAY)); 
+            }
+        }
+    }
+        
+    private void setMenuItemsStyle(JMenu menu) {
+        
+        for (Component comp : menu.getMenuComponents()) {
+            if (comp instanceof JMenuItem) {
+                JMenuItem menuItem = (JMenuItem) comp;
+                menuItem.setForeground(Color.WHITE); 
+                menuItem.setFont(new Font("Arial", Font.PLAIN, 14)); 
+                menuItem.setBackground(new Color(51, 153, 255)); 
+                menuItem.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Color.LIGHT_GRAY));
+            }
+        }
+    }
     public static void main(String[] args) {
         // Mostrar el splash screen
         // SplashScreen splash = new SplashScreen(5000);
