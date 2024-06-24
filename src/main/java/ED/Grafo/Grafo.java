@@ -6,8 +6,6 @@ import java.util.List;
 import java.util.Map;
 
 import java.awt.CardLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.BorderLayout;
 
 import javax.swing.JButton;
@@ -26,7 +24,7 @@ public class Grafo {
     }
 
     public void agregarArista(String desde, String hasta) {
-        Nodo nodoDesde = new Nodo(desde, true);  // Asumiendo que 'desde' es siempre un rol
+        Nodo nodoDesde = new Nodo(desde, true); // Asumiendo que 'desde' es siempre un rol
         Nodo nodoHasta = new Nodo(hasta, false); // Asumiendo que 'hasta' es siempre un recurso
         adyacencias.putIfAbsent(nodoDesde, new ArrayList<>());
         adyacencias.putIfAbsent(nodoHasta, new ArrayList<>());
@@ -48,22 +46,26 @@ public class Grafo {
         return adyacencias.getOrDefault(nodoRol, new ArrayList<>());
     }
 
-    public void imprimirGrafo2() {
-        for (Map.Entry<Nodo, List<Nodo>> entrada : adyacencias.entrySet()) {
-            System.out.println(entrada.getKey() + " -> " + entrada.getValue());
-        }
-    }
-
-
     public void crearYMostrarVentana() {
         JFrame frame = new JFrame("Gestión de Acceso a Instalaciones");
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        frame.setSize(800, 600);
+        frame.setSize(1000, 700);
+        frame.setLocationRelativeTo(null);
+
 
         JPanel cardPanel = new JPanel(new CardLayout());
         JPanel buttonPanel = new JPanel();
 
         CardLayout cardLayout = (CardLayout) cardPanel.getLayout();
+
+        // Añadir opción para mostrar todos
+        GrafoPanel allNodesPanel = new GrafoPanel(this, null); // null para indicar mostrar todos
+        cardPanel.add(allNodesPanel, "Todos");
+
+        // Botón para mostrar todos
+        JButton showAllButton = new JButton("Todos");
+        showAllButton.addActionListener(e -> cardLayout.show(cardPanel, "Todos"));
+        buttonPanel.add(showAllButton);
 
         // Añadir un panel para cada rol
         for (Nodo rol : adyacencias.keySet()) {
@@ -72,12 +74,7 @@ public class Grafo {
                 cardPanel.add(panel, rol.nombre);
 
                 JButton button = new JButton(rol.nombre);
-                button.addActionListener(new ActionListener() {
-                    @Override
-                    public void actionPerformed(ActionEvent e) {
-                        cardLayout.show(cardPanel, rol.nombre);
-                    }
-                });
+                button.addActionListener(e -> cardLayout.show(cardPanel, rol.nombre));
                 buttonPanel.add(button);
             }
         }
@@ -85,7 +82,13 @@ public class Grafo {
         frame.add(buttonPanel, BorderLayout.NORTH);
         frame.add(cardPanel, BorderLayout.CENTER);
         frame.setVisible(true);
-    }   
+    }
+
+    public void imprimirGrafo() {
+        for (Map.Entry<Nodo, List<Nodo>> entrada : adyacencias.entrySet()) {
+            System.out.println(entrada.getKey() + " -> " + entrada.getValue());
+        }
+    }
 }
 
 class Arista {
