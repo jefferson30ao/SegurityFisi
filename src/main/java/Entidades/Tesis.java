@@ -1,14 +1,6 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package Entidades;
 
-/**
- *
- * @author nalle
- */
-public class Tesis extends Volumen{
+public class Tesis extends Volumen {
     private String grado;
     private String asesor;
 
@@ -35,7 +27,8 @@ public class Tesis extends Volumen{
         this.asesor = asesor;
     }
 
-    // Sobrescribir el método toString() para proporcionar una representación detallada de la tesis
+    // Sobrescribir el método toString() para proporcionar una representación
+    // detallada de la tesis
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();

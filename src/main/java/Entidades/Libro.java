@@ -1,25 +1,15 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Entidades;
 
-/**
- *
- * @author javier
- */
-public class Libro extends Volumen{
+public class Libro extends Volumen {
     private String editorial;
     private String materia;
 
-    
     public Libro(String editorial, String materia, String titulo, int codigo, String pais, int cantidad, int numeroDePaginas) {
         super(titulo, codigo, pais, cantidad, numeroDePaginas);
         this.editorial = editorial;
         this.materia = materia;
     }
-    
+
     // Getters y setters
     public String getEditorial() {
         return editorial;
@@ -37,7 +27,8 @@ public class Libro extends Volumen{
         this.materia = materia;
     }
 
-    // Sobrescribir el método toString() para proporcionar una representación detallada del libro
+    // Sobrescribir el método toString() para proporcionar una representación
+    // detallada del libro
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();

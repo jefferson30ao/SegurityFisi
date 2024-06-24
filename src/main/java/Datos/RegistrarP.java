@@ -1,14 +1,9 @@
-
 package Datos;
 
 import Entidades.Prestar;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
-/**
- *
- * @author nalle
- */
 public class RegistrarP {
 
     static ArrayList<Prestar> registros;
@@ -42,10 +37,10 @@ public class RegistrarP {
         if (!repetido) {
             registros.add(pres);
             JOptionPane.showMessageDialog(null, "Préstamo registrado");
-            return true;  // Se agregó el préstamo correctamente
+            return true; // Se agregó el préstamo correctamente
         }
 
-        return false;  // No se pudo agregar el préstamo
+        return false; // No se pudo agregar el préstamo
     }
 
     public static void eliminarPrestamo(int code) {

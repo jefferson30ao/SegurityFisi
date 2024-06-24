@@ -164,8 +164,8 @@ public class Menu extends JFrame {
         btnReportesIncidencias.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // Aquí iría el código para manejar los reportes de incidencias
-                JOptionPane.showMessageDialog(null, "Reportes de Incidencias no implementado aún.");
+                GestorIncidencias reporteIncidencia = new GestorIncidencias();
+                reporteIncidencia.setVisible(true);    
             }
         });
 

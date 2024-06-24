@@ -1,19 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Entidades;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-/**
- *
- * @author javier
- */
-public class Revista extends Volumen{
-     
+public class Revista extends Volumen {
+
     private int volumen;
     private Date periodicidad;
     private String area;
@@ -50,7 +41,8 @@ public class Revista extends Volumen{
         this.area = area;
     }
 
-    // Sobrescribir el método toString() para proporcionar una representación detallada de la revista
+    // Sobrescribir el método toString() para proporcionar una representación
+    // detallada de la revista
     @Override
     public String toString() {
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
