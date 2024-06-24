@@ -5,6 +5,7 @@ import Entidades.Instalacion;
 
 import javax.swing.*;
 
+import java.io.ObjectInputFilter.Config;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.LinkedList;
@@ -12,6 +13,7 @@ import java.util.Queue;
 import javax.swing.table.DefaultTableModel;
 import java.util.List;
 
+import ED.Grafo.Configurar;
 import ED.Grafo.Grafo;
 import ED.Grafo.Nodo;
 
@@ -311,7 +313,8 @@ public class Instalaciones extends JFrame {
 
     private void configBActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_configBActionPerformed
         // Crear el marco y agregar el panel del grafo
-        grafo.crearYMostrarVentana();
+        Configurar config = new Configurar(grafo);
+        //grafo.crearYMostrarVentana();
     }// GEN-LAST:event_configBActionPerformed
 
     private void ReservarActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_ReservarActionPerformed

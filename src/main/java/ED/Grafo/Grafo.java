@@ -51,8 +51,6 @@ public class Grafo {
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.setSize(1000, 700);
         frame.setLocationRelativeTo(null);
-
-
         JPanel cardPanel = new JPanel(new CardLayout());
         JPanel buttonPanel = new JPanel();
 
