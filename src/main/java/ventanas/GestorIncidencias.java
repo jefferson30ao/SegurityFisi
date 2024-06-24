@@ -1,13 +1,13 @@
 package ventanas;
 
+import ED.ListaEnlazada;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.*;
-import java.util.ArrayList;
 
 public class GestorIncidencias extends JFrame {
-    private ArrayList<String> incidencias;
+    private ListaEnlazada<String> incidencias;
     private DefaultListModel<String> listModel;
     private JList<String> incidenciasList;
 
@@ -18,7 +18,7 @@ public class GestorIncidencias extends JFrame {
     private static final Font FUENTE_TITULO = new Font("Segoe UI", Font.BOLD, 18);
 
     public GestorIncidencias() {
-        incidencias = new ArrayList<>();
+        incidencias = new ListaEnlazada<>();
         listModel = new DefaultListModel<>();
 
         setTitle("Gestor de Incidencias");
@@ -92,7 +92,7 @@ public class GestorIncidencias extends JFrame {
         guardarButton.addActionListener(e -> {
             String incidencia = textArea.getText();
             if (!incidencia.isEmpty()) {
-                incidencias.add(incidencia);
+                incidencias.agregar(incidencia);
                 listModel.addElement(incidencia);
                 JOptionPane.showMessageDialog(ventanaRegistro, "Incidencia registrada con éxito.");
                 ventanaRegistro.dispose();
@@ -110,6 +110,7 @@ public class GestorIncidencias extends JFrame {
         ventanaVisualizacion.setLocationRelativeTo(this);
         ventanaVisualizacion.getContentPane().setBackground(COLOR_FONDO);
 
+        actualizarListModel();
         incidenciasList = new JList<>(listModel);
         incidenciasList.setFont(new Font("Segoe UI", Font.PLAIN, 14));
         incidenciasList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -138,10 +139,17 @@ public class GestorIncidencias extends JFrame {
         ventanaVisualizacion.setVisible(true);
     }
 
+    private void actualizarListModel() {
+        listModel.clear();
+        for (int i = 0; i < incidencias.tamaño(); i++) {
+            listModel.addElement(incidencias.obtener(i));
+        }
+    }
+
     private void editarIncidencia() {
         int selectedIndex = incidenciasList.getSelectedIndex();
         if (selectedIndex != -1) {
-            String incidenciaActual = incidencias.get(selectedIndex);
+            String incidenciaActual = incidencias.obtener(selectedIndex);
             JTextArea textArea = new JTextArea(incidenciaActual);
             textArea.setLineWrap(true);
             textArea.setWrapStyleWord(true);
@@ -156,7 +164,7 @@ public class GestorIncidencias extends JFrame {
             if (result == JOptionPane.OK_OPTION) {
                 String incidenciaEditada = textArea.getText();
                 if (!incidenciaEditada.isEmpty()) {
-                    incidencias.set(selectedIndex, incidenciaEditada);
+                    incidencias.establecer(selectedIndex, incidenciaEditada);
                     listModel.setElementAt(incidenciaEditada, selectedIndex);
                 }
             }
@@ -172,8 +180,8 @@ public class GestorIncidencias extends JFrame {
                 "¿Está seguro de que desea eliminar esta incidencia?", 
                 "Confirmar eliminación", JOptionPane.YES_NO_OPTION);
             if (confirm == JOptionPane.YES_OPTION) {
-                incidencias.remove(selectedIndex);
-                listModel.remove(selectedIndex);
+                incidencias.eliminar(selectedIndex);
+                actualizarListModel();
             }
         } else {
             JOptionPane.showMessageDialog(this, "Por favor, seleccione una incidencia para eliminar.");
