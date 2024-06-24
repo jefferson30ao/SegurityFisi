@@ -28,10 +28,10 @@ public class Instalaciones extends JFrame {
     private String[][] relaciones;
 
     public Instalaciones() {
-        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
         colaInstalaciones = new LinkedList<>();
         initComponents();
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         agregarModeloTablaInstalacion();
 
         grafo = new Grafo();
@@ -237,8 +237,8 @@ public class Instalaciones extends JFrame {
                             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                 .addGroup(jPanel2Layout.createSequentialGroup()
                                     .addComponent(Reservar)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(regresar, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(regresar, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGroup(jPanel2Layout.createSequentialGroup()
                                     .addComponent(jLabel3)
                                     .addGap(136, 136, 136)
