@@ -46,12 +46,18 @@ public class Instalaciones extends JFrame {
                 { "Administrativo", "Oficina" }
         };
         for (String rol_ : roles) {
-            grafo.agregarNodo(rol_);
             rol.addItem(rol_);
         }
-        for (String recurso : recursos) {
-            grafo.agregarNodo(recurso);
-        }
+
+        // Agregar roles
+        grafo.agregarNodo("Estudiante", true);
+        grafo.agregarNodo("Profesor", true);
+        grafo.agregarNodo("Administrativo", true);
+
+        // Agregar recursos
+        grafo.agregarNodo("Laboratorio", false);
+        grafo.agregarNodo("Sala de Estudio", false);
+        grafo.agregarNodo("Oficina", false);
         for (String[] relacion : relaciones) {
             grafo.agregarArista(relacion[0], relacion[1]);
         }
@@ -356,7 +362,7 @@ public class Instalaciones extends JFrame {
 
     private void configBActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_configBActionPerformed
         // Crear el marco y agregar el panel del grafo
-        grafo.imprimirGrafo();
+        grafo.crearYMostrarVentana();
     }// GEN-LAST:event_configBActionPerformed
 
     private void ReservarActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_ReservarActionPerformed
